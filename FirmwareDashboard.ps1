@@ -1,6 +1,6 @@
 param(
-    [string]$APIKey = "04d4d9f21d661b8b817cf8491e5178252bbeec83",
-    [string]$OrgId  = "629378047925027937"
+    [string]$APIKey = "APIKEY",
+    [string]$OrgId  = "ORGID"
 )
 
 # Validate required parameters
