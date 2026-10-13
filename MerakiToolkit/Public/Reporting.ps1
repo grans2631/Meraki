@@ -25,16 +25,12 @@ function Get-MerakiHealth {
         GeneratedAtUtc = [datetime]::UtcNow
     }
 }
-<#
-.SYNOPSIS
-Build a read-only fleet summary with per-network and device rows.
-.EXAMPLE
-Get-MerakiDashboard -OrganizationId 'ORG_ID'
-#>
 function Get-MerakiDashboard {
     <#
     .SYNOPSIS
     Read-only fleet snapshot containing totals, per-network statistics and device rows.
+    .EXAMPLE
+    Get-MerakiDashboard -OrganizationId 'ORG_ID'
     #>
     [CmdletBinding()]param([Parameter(Mandatory)][string]$OrganizationId)
     $devices = @(Get-MerakiOrganizationInventory -OrganizationId $OrganizationId)
@@ -168,18 +164,14 @@ function ConvertTo-MerakiSafeValue {
     }
     return $Value
 }
-<#
-.SYNOPSIS
-Export a best-effort redacted network configuration snapshot.
-.EXAMPLE
-Export-MerakiNetworkConfig -NetworkId 'N_123' -Path '.\site.json'
-#>
 function Export-MerakiNetworkConfig {
     <#
     .SYNOPSIS
     Export selected readable settings to a LOCAL redacted JSON file.
     .NOTES
     Network configuration can contain sensitive customer topology. Keep reports private.
+    .EXAMPLE
+    Export-MerakiNetworkConfig -NetworkId 'N_123' -Path '.\site.json'
     #>
     [CmdletBinding()]param(
         [Parameter(Mandatory)][string]$NetworkId,
