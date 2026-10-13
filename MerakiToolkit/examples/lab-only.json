@@ -1,0 +1,15 @@
+{
+  "organizationId": "YOUR_LAB_ORGANIZATION_ID",
+  "claimToInventory": false,
+  "network": {
+    "name": "ToolkitLAB-ChangeToUniqueName",
+    "productTypes": [
+      "wireless"
+    ],
+    "tags": [
+      "MerakiToolkit-LAB"
+    ],
+    "timeZone": "America/New_York"
+  },
+  "devices": []
+}
