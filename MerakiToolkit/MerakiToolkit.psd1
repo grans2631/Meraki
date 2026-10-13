@@ -22,7 +22,7 @@
         'Set-MerakiFirewallRules','Set-MerakiVpnConfiguration',
         'Restart-MerakiDevice','Set-MerakiFirmwareUpgrade',
         'Get-MerakiDeploymentPlan','Invoke-MerakiDeployment',
-        'Start-MerakiDevicePing','Start-MerakiCableTest','Start-MerakiThroughputTest','Start-MerakiPortCycle','Start-MerakiWakeOnLan','Get-MerakiLiveToolResult','Get-MerakiFailedClientConnections','Get-MerakiHealthDiff'
+        'Start-MerakiDevicePing','Start-MerakiCableTest','Start-MerakiThroughputTest','Start-MerakiPortCycle','Start-MerakiWakeOnLan','Get-MerakiLiveToolResult','Get-MerakiFailedClientConnections','Get-MerakiHealthDiff','Get-MerakiConfigDiff'
     )
     CmdletsToExport = @()
     VariablesToExport = @()
