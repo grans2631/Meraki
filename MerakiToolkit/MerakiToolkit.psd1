@@ -16,7 +16,7 @@
         'Get-MerakiApplianceVlan','Get-MerakiFirewallRules','Get-MerakiVpnConfiguration',
         'Get-MerakiConfigurationChanges','Get-MerakiDeviceUplink','Get-MerakiHealth',
         'Get-MerakiDashboard','Export-MerakiDashboard','Get-MerakiNetworkDiagnostics',
-        'Export-MerakiNetworkConfig','New-MerakiNetwork','Add-MerakiNetworkDevice',
+        'Export-MerakiNetworkConfig','New-MerakiNetwork','Add-MerakiNetworkDevice','Add-MerakiOrganizationInventory',
         'Set-MerakiDevice','Set-MerakiSwitchPort','Set-MerakiWirelessSsid',
         'New-MerakiApplianceVlan','Set-MerakiApplianceVlan',
         'Set-MerakiFirewallRules','Set-MerakiVpnConfiguration',
