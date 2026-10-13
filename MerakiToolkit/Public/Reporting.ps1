@@ -1,4 +1,10 @@
 # Reporting, dashboards, diagnostics, safe local configuration export.
+<#
+.SYNOPSIS
+Summarize availability counts for the Meraki fleet.
+.EXAMPLE
+Get-MerakiHealth -OrganizationId 'ORG_ID'
+#>
 function Get-MerakiHealth {
     [CmdletBinding()]param([Parameter(Mandatory)][string]$OrganizationId)
     $inventory = @(Get-MerakiOrganizationInventory -OrganizationId $OrganizationId)
@@ -19,6 +25,12 @@ function Get-MerakiHealth {
         GeneratedAtUtc = [datetime]::UtcNow
     }
 }
+<#
+.SYNOPSIS
+Build a read-only fleet summary with per-network and device rows.
+.EXAMPLE
+Get-MerakiDashboard -OrganizationId 'ORG_ID'
+#>
 function Get-MerakiDashboard {
     <#
     .SYNOPSIS
@@ -53,6 +65,12 @@ function Get-MerakiDashboard {
         Devices = @($devices)
     }
 }
+<#
+.SYNOPSIS
+Export fleet health to HTML, JSON or CSV locally.
+.EXAMPLE
+Export-MerakiDashboard -OrganizationId 'ORG_ID' -Path '.\fleet.html' -Format Html
+#>
 function Export-MerakiDashboard {
     [CmdletBinding()]param(
         [Parameter(Mandatory)][string]$OrganizationId,
@@ -77,6 +95,12 @@ function Export-MerakiDashboard {
     }
     Get-Item -LiteralPath $Path
 }
+<#
+.SYNOPSIS
+Collect offline devices, firmware, uplink and event diagnostic context.
+.EXAMPLE
+Get-MerakiNetworkDiagnostics -OrganizationId 'ORG_ID' -NetworkId 'N_123'
+#>
 function Get-MerakiNetworkDiagnostics {
     [CmdletBinding()]param(
         [Parameter(Mandatory)][string]$OrganizationId,
@@ -144,6 +168,12 @@ function ConvertTo-MerakiSafeValue {
     }
     return $Value
 }
+<#
+.SYNOPSIS
+Export a best-effort redacted network configuration snapshot.
+.EXAMPLE
+Export-MerakiNetworkConfig -NetworkId 'N_123' -Path '.\site.json'
+#>
 function Export-MerakiNetworkConfig {
     <#
     .SYNOPSIS
