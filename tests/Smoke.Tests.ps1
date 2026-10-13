@@ -32,4 +32,14 @@ try {
     try { Get-MerakiDeploymentPlan -ManifestPath $badPath | Out-Null } catch { $thrown = $true }
     if (-not $thrown) { throw 'Duplicate serial validation did not reject invalid manifest.' }
 } finally { Remove-Item -LiteralPath $badPath -ErrorAction SilentlyContinue }
+# Offline safety gate: the lab manifest should only plan one new network, never serial/device changes.
+$labPath = Join-Path $root 'MerakiToolkit/examples/lab-only.json'
+$labPlan = Get-MerakiDeploymentPlan -ManifestPath $labPath
+if ($labPlan.DeviceCount -ne 0 -or $labPlan.Actions.Count -ne 1) {
+    throw 'Lab-only manifest must plan exactly one network and zero device actions.'
+}
+$labPreview = Invoke-MerakiDeployment -ManifestPath $labPath -WhatIf
+if (-not $labPreview -or $labPreview.DeviceCount -ne 0) {
+    throw 'Lab-only WhatIf must remain offline and contain zero devices.'
+}
 Write-Output ("PASS: Imported MerakiToolkit. {0} exported commands. Examples validated." -f (Get-Command -Module MerakiToolkit).Count)
