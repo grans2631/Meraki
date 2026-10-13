@@ -128,7 +128,7 @@ function Get-MerakiFirmwareReport {
 function Get-MerakiWirelessSsid {
     [CmdletBinding()]param(
         [Parameter(Mandatory)][string]$NetworkId,
-        [ValidateRange(0,14)][int]$Number = -1
+        [ValidateRange(0,14)][Nullable[int]]$Number
     )
     if ($PSBoundParameters.ContainsKey('Number')) {
         return Invoke-MerakiApi -Path "/networks/$NetworkId/wireless/ssids/$Number"
