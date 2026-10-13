@@ -1,0 +1,27 @@
+name: Meraki PowerShell module checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  powershell-7-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run offline smoke tests
+        shell: pwsh
+        run: ./tests/Smoke.Tests.ps1
+  powershell-7-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run offline smoke tests
+        shell: pwsh
+        run: ./tests/Smoke.Tests.ps1
+  windows-powershell-51:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Windows PowerShell 5.1 smoke tests
+        shell: powershell
+        run: ./tests/Smoke.Tests.ps1
