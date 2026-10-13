@@ -75,6 +75,12 @@ function Read-MerakiManifest {
     }
     return $manifest
 }
+<#
+.SYNOPSIS
+Validate a site manifest and return a no-write action plan.
+.EXAMPLE
+Get-MerakiDeploymentPlan -ManifestPath '.\MerakiToolkit\examples\full-site.json'
+#>
 function Get-MerakiDeploymentPlan {
     <#
     .SYNOPSIS
@@ -115,6 +121,12 @@ function Get-MerakiDeploymentPlan {
         )
     }
 }
+<#
+.SYNOPSIS
+Deploy the manifest after explicit approval; -WhatIf leaves the network unchanged.
+.EXAMPLE
+Invoke-MerakiDeployment -ManifestPath '.\MerakiToolkit\examples\full-site.json' -WhatIf
+#>
 function Invoke-MerakiDeployment {
     <#
     .SYNOPSIS
