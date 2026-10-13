@@ -41,3 +41,16 @@ Describe 'Fail-closed desired-state apply gates' {
         }
     }
 }
+
+Describe 'Firewall snapshot completeness verification' {
+    It 'accepts an intact full ordered firewall snapshot and avoids resource matching' {
+        $snapshot=Join-Path $TestDrive 'before-firewall.json'
+        '{"network":{"id":"N_123"},"firewall":{"rules":[{"policy":"allow","protocol":"udp","srcCidr":"any","destCidr":"any","destPort":"53"}]}}' | Set-Content -LiteralPath $snapshot
+        $rule=@{policy='allow';protocol='udp';srcCidr='any';destCidr='any';destPort='53'}
+        $change=[pscustomobject]@{Family='applianceL3FirewallRules';Identity='complete-ordered-ruleset';Action='Replace';Before=@($rule);Desired=@($rule)}
+        InModuleScope MerakiToolkit -Parameters @{Snapshot=$snapshot;Change=$change} {
+            $diff=[pscustomobject]@{networkId='N_123';changes=@($Change)}
+            (Assert-MerakiConfigSnapshot -Path $Snapshot -Diff $diff) | Should -BeTrue
+        }
+    }
+}
