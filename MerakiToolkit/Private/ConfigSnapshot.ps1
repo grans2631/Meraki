@@ -6,6 +6,7 @@ function Assert-MerakiConfigSnapshot {
     }
     foreach($change in @($Diff.changes)) {
         $found=$null
+        $firewallVerified=$false
         switch($change.Family){
             'wirelessSsids' {
                 if ($null -eq $snapshot.ssids){throw 'Snapshot incomplete: wireless SSIDs were not exported.'}
@@ -30,10 +31,11 @@ function Assert-MerakiConfigSnapshot {
                 if (-not (Test-MerakiConfigEqual @($snapshot.firewall.rules) @($change.Before))){
                     throw 'Snapshot firewall rules do not match the preview. Aborting.'
                 }
-                continue
+                $firewallVerified=$true
             }
             default {throw "Unknown template family: $($change.Family)"}
         }
+        if ($firewallVerified) { continue }
         if ($found.Count -ne 1) {throw "Snapshot missing or ambiguous target: $($change.Family) $($change.Identity)."}
         $previous=Select-MerakiConfigFields -Actual $found[0] -Desired $change.Desired
         if (-not (Test-MerakiConfigEqual $previous $change.Before)) {
