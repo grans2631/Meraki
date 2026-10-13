@@ -10,7 +10,7 @@ function New-MerakiNetwork {
     param(
         [Parameter(Mandatory)][string]$OrganizationId,
         [Parameter(Mandatory)][string]$Name,
-        [Parameter(Mandatory)][ValidateSet('appliance','switch','wireless')][string[]]$ProductTypes,
+        [Parameter(Mandatory)][ValidateSet('appliance','switch','wireless','camera','cellularGateway','sensor')][string[]]$ProductTypes,
         [string]$TimeZone = 'America/New_York',
         [string[]]$Tags,
         [string]$CopyFromNetworkId
@@ -193,7 +193,7 @@ function Set-MerakiFirmwareUpgrade {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
         [Parameter(Mandatory)][string]$NetworkId,
-        [Parameter(Mandatory)][ValidateSet('appliance','switch','wireless')][string]$ProductType,
+        [Parameter(Mandatory)][ValidateSet('appliance','switch','wireless','camera','cellularGateway','sensor')][string]$ProductType,
         [Parameter(Mandatory)][string]$VersionId,
         [Parameter(Mandatory)][datetime]$TimeUtc
     )
