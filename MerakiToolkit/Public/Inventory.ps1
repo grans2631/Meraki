@@ -82,16 +82,12 @@ function Get-MerakiDeviceAvailability {
     if ($Status) { $q.statuses = $Status }
     Invoke-MerakiApi -Path "/organizations/$OrganizationId/devices/availabilities" -Query $q -AllPages
 }
-<#
-.SYNOPSIS
-Join network, device and availability data into inventory rows.
-.EXAMPLE
-Get-MerakiOrganizationInventory -OrganizationId 'ORG_ID'
-#>
 function Get-MerakiOrganizationInventory {
     <#
     .SYNOPSIS
     Correlate inventory with network and availability data by device serial.
+    .EXAMPLE
+    Get-MerakiOrganizationInventory -OrganizationId 'ORG_ID'
     #>
     [CmdletBinding()]param([Parameter(Mandatory)][string]$OrganizationId)
     $networks = @(Get-MerakiNetwork -OrganizationId $OrganizationId)
