@@ -1,4 +1,10 @@
 # All configuration writes use PowerShell ShouldProcess. Pass -WhatIf to preview.
+<#
+.SYNOPSIS
+Create a new Dashboard network with selected product families.
+.EXAMPLE
+New-MerakiNetwork -OrganizationId 'ORG_ID' -Name 'Lab' -ProductTypes appliance,switch -WhatIf
+#>
 function New-MerakiNetwork {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
@@ -16,6 +22,12 @@ function New-MerakiNetwork {
         Invoke-MerakiApi -Method POST -Path "/organizations/$OrganizationId/networks" -Body $body
     }
 }
+<#
+.SYNOPSIS
+Assign claimed device serials to a selected network.
+.EXAMPLE
+Add-MerakiNetworkDevice -NetworkId 'N_123' -Serials @('QXXX-XXXX-XXXX') -WhatIf
+#>
 function Add-MerakiNetworkDevice {
     <#
     .DESCRIPTION
@@ -29,6 +41,12 @@ function Add-MerakiNetworkDevice {
         Invoke-MerakiApi -Method POST -Path "/networks/$NetworkId/devices/claim" -Body @{serials=$unique}
     }
 }
+<#
+.SYNOPSIS
+Update name, tags or other supported device metadata.
+.EXAMPLE
+Set-MerakiDevice -Serial 'QXXX-XXXX-XXXX' -Settings @{name='Lab-AP01'} -WhatIf
+#>
 function Set-MerakiDevice {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
@@ -44,6 +62,12 @@ function Set-MerakiDevice {
         Invoke-MerakiApi -Method PUT -Path "/devices/$Serial" -Body $Settings
     }
 }
+<#
+.SYNOPSIS
+Update a switch port; review VLAN and PoE impact.
+.EXAMPLE
+Set-MerakiSwitchPort -Serial 'QXXX-XXXX-XXXX' -PortId '1' -Settings @{name='AP'} -WhatIf
+#>
 function Set-MerakiSwitchPort {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
@@ -56,6 +80,12 @@ function Set-MerakiSwitchPort {
         Invoke-MerakiApi -Method PUT -Path "/devices/$Serial/switch/ports/$PortId" -Body $Settings
     }
 }
+<#
+.SYNOPSIS
+Update SSID settings in a network.
+.EXAMPLE
+Set-MerakiWirelessSsid -NetworkId 'N_123' -Number 0 -Settings @{enabled=$false} -WhatIf
+#>
 function Set-MerakiWirelessSsid {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
@@ -68,6 +98,12 @@ function Set-MerakiWirelessSsid {
         Invoke-MerakiApi -Method PUT -Path "/networks/$NetworkId/wireless/ssids/$Number" -Body $Settings
     }
 }
+<#
+.SYNOPSIS
+Create an MX VLAN when VLAN mode is already enabled.
+.EXAMPLE
+New-MerakiApplianceVlan -NetworkId 'N_123' -Settings @{id='10';name='Lab';subnet='192.0.2.0/24';applianceIp='192.0.2.1'} -WhatIf
+#>
 function New-MerakiApplianceVlan {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param([Parameter(Mandatory)][string]$NetworkId,[Parameter(Mandatory)][hashtable]$Settings)
@@ -78,6 +114,12 @@ function New-MerakiApplianceVlan {
         Invoke-MerakiApi -Method POST -Path "/networks/$NetworkId/appliance/vlans" -Body $Settings
     }
 }
+<#
+.SYNOPSIS
+Update the properties of an existing MX VLAN.
+.EXAMPLE
+Set-MerakiApplianceVlan -NetworkId 'N_123' -VlanId '10' -Settings @{name='Lab'} -WhatIf
+#>
 function Set-MerakiApplianceVlan {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
@@ -90,6 +132,12 @@ function Set-MerakiApplianceVlan {
         Invoke-MerakiApi -Method PUT -Path "/networks/$NetworkId/appliance/vlans/$VlanId" -Body $Settings
     }
 }
+<#
+.SYNOPSIS
+Replace the ENTIRE MX L3 ruleset; never use a partial list.
+.EXAMPLE
+Set-MerakiFirewallRules -NetworkId 'N_123' -Rules @(@{comment='Allow DNS';policy='allow';protocol='udp';srcCidr='any';destCidr='any';destPort='53'}) -WhatIf
+#>
 function Set-MerakiFirewallRules {
     <#
     .DESCRIPTION
@@ -103,6 +151,12 @@ function Set-MerakiFirewallRules {
         Invoke-MerakiApi -Method PUT -Path "/networks/$NetworkId/appliance/firewall/l3FirewallRules" -Body @{rules=$Rules}
     }
 }
+<#
+.SYNOPSIS
+Replace MX site-to-site VPN settings; potentially disruptive.
+.EXAMPLE
+Set-MerakiVpnConfiguration -NetworkId 'N_123' -Settings @{mode='none'} -WhatIf
+#>
 function Set-MerakiVpnConfiguration {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param([Parameter(Mandatory)][string]$NetworkId,[Parameter(Mandatory)][hashtable]$Settings)
@@ -111,6 +165,12 @@ function Set-MerakiVpnConfiguration {
         Invoke-MerakiApi -Method PUT -Path "/networks/$NetworkId/appliance/vpn/siteToSiteVpn" -Body $Settings
     }
 }
+<#
+.SYNOPSIS
+Reboot a Meraki device; disrupts network service.
+.EXAMPLE
+Restart-MerakiDevice -Serial 'QXXX-XXXX-XXXX' -WhatIf
+#>
 function Restart-MerakiDevice {
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param([Parameter(Mandatory)][string]$Serial)
@@ -118,6 +178,12 @@ function Restart-MerakiDevice {
         Invoke-MerakiApi -Method POST -Path "/devices/$Serial/reboot"
     }
 }
+<#
+.SYNOPSIS
+Schedule a network product-family firmware upgrade by version ID.
+.EXAMPLE
+Set-MerakiFirmwareUpgrade -NetworkId 'N_123' -ProductType switch -VersionId 'VERSION_ID' -TimeUtc '2026-12-01T03:00:00Z' -WhatIf
+#>
 function Set-MerakiFirmwareUpgrade {
     <#
     .DESCRIPTION
