@@ -1,0 +1,47 @@
+{
+  "organizationId": "YOUR_ORGANIZATION_ID",
+  "network": {
+    "existingNetworkId": "YOUR_EXISTING_NETWORK_ID",
+    "productTypes": [
+      "switch",
+      "wireless"
+    ]
+  },
+  "devices": [
+    {
+      "serial": "QXXX-MS-REPLACE",
+      "productType": "switch",
+      "name": "Site02-MS02"
+    },
+    {
+      "serial": "QXXX-MR-REPLACE",
+      "productType": "wireless",
+      "name": "Site02-MR02"
+    }
+  ],
+  "ms": {
+    "ports": [
+      {
+        "serial": "QXXX-MS-REPLACE",
+        "portId": "2",
+        "settings": {
+          "name": "Printer",
+          "enabled": true,
+          "type": "access",
+          "vlan": 20
+        }
+      }
+    ]
+  },
+  "mr": {
+    "ssids": [
+      {
+        "number": 1,
+        "settings": {
+          "name": "Guest",
+          "enabled": false
+        }
+      }
+    ]
+  }
+}

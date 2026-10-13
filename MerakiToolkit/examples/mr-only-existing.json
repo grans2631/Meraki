@@ -1,0 +1,27 @@
+{
+  "organizationId": "YOUR_ORGANIZATION_ID",
+  "network": {
+    "existingNetworkId": "YOUR_EXISTING_NETWORK_ID",
+    "productTypes": [
+      "wireless"
+    ]
+  },
+  "devices": [
+    {
+      "serial": "QXXX-MR-REPLACE",
+      "productType": "wireless",
+      "name": "Branch-AP03"
+    }
+  ],
+  "mr": {
+    "ssids": [
+      {
+        "number": 2,
+        "settings": {
+          "name": "Branch-Guest",
+          "enabled": false
+        }
+      }
+    ]
+  }
+}
