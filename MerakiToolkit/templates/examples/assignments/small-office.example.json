@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "MerakiConfigAssignment",
+  "description": "EXAMPLE ONLY: change networkId to an exact lab network ID before running read-only diff.",
+  "networkId": "N_REPLACE_WITH_LAB_NETWORK_ID",
+  "base": "../base.json",
+  "overlays": [
+    "../overlays/small-office.json"
+  ]
+}

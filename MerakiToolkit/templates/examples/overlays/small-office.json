@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "MerakiConfigLayer",
+  "description": "Small office overlay; replace serial and validate VLAN before applying.",
+  "wirelessSsids": [
+    {
+      "number": 0,
+      "settings": {
+        "name": "ExampleOffice-Small"
+      }
+    }
+  ],
+  "switchPorts": [
+    {
+      "serial": "QXXX-REPLACE-THIS",
+      "portId": "1",
+      "settings": {
+        "name": "User-Workstation",
+        "type": "access",
+        "vlan": 10,
+        "enabled": true
+      }
+    }
+  ]
+}

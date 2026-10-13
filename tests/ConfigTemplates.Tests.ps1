@@ -45,3 +45,19 @@ Describe 'Meraki desired-state template v1 resolver' {
         }
     }
 }
+
+Describe 'Versioned examples remain valid offline' {
+    It 'resolves shipped small-office base and overlay without API calls' {
+        $root=Split-Path $PSScriptRoot -Parent
+        $template=Join-Path $root 'MerakiToolkit/templates/examples/assignments/small-office.example.json'
+        InModuleScope MerakiToolkit -Parameters @{Template=$template} {
+            $resolved=Resolve-MerakiConfigTemplate -Template $Template
+            $resolved.networkId | Should -BeExactly 'N_REPLACE_WITH_LAB_NETWORK_ID'
+            $resolved.settings.wirelessSsids[0].settings.name | Should -Be 'ExampleOffice-Small'
+            $resolved.settings.wirelessSsids[0].settings.enabled | Should -BeFalse
+            @($resolved.settings.applianceVlans).Count | Should -Be 1
+            @($resolved.settings.switchPorts).Count | Should -Be 1
+            $resolved.settings.applianceL3FirewallRules | Should -BeNullOrEmpty
+        }
+    }
+}

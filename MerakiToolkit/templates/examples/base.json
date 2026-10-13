@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "MerakiConfigLayer",
+  "description": "Example baseline for one pre-existing MX/MS/MR network. Not a secret store.",
+  "wirelessSsids": [
+    {
+      "number": 0,
+      "settings": {
+        "name": "ExampleOffice",
+        "enabled": false
+      }
+    }
+  ],
+  "applianceVlans": [
+    {
+      "id": "10",
+      "settings": {
+        "name": "Office-LAN"
+      }
+    }
+  ]
+}
