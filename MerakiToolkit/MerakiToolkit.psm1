@@ -23,5 +23,5 @@ Export-ModuleMember -Function @(
     'Set-MerakiFirewallRules','Set-MerakiVpnConfiguration',
     'Restart-MerakiDevice','Set-MerakiFirmwareUpgrade',
     'Get-MerakiDeploymentPlan','Invoke-MerakiDeployment',
-        'Start-MerakiDevicePing','Start-MerakiCableTest','Start-MerakiThroughputTest','Start-MerakiPortCycle','Start-MerakiWakeOnLan','Get-MerakiLiveToolResult','Get-MerakiFailedClientConnections','Get-MerakiHealthDiff','Get-MerakiConfigDiff'
+        'Start-MerakiDevicePing','Start-MerakiCableTest','Start-MerakiThroughputTest','Start-MerakiPortCycle','Start-MerakiWakeOnLan','Get-MerakiLiveToolResult','Get-MerakiFailedClientConnections','Get-MerakiHealthDiff','Get-MerakiConfigDiff','Invoke-MerakiConfigTemplate'
 )
