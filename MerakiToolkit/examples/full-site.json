@@ -1,0 +1,63 @@
+{
+  "organizationId": "YOUR_ORGANIZATION_ID",
+  "claimToInventory": false,
+  "network": {
+    "name": "Customer - Site 01",
+    "productTypes": [
+      "appliance",
+      "switch",
+      "wireless"
+    ],
+    "timeZone": "America/New_York"
+  },
+  "devices": [
+    {
+      "serial": "QXXX-MX-REPLACE",
+      "productType": "appliance",
+      "name": "Site01-MX01"
+    },
+    {
+      "serial": "QXXX-MS-REPLACE",
+      "productType": "switch",
+      "name": "Site01-MS01"
+    },
+    {
+      "serial": "QXXX-MR-REPLACE",
+      "productType": "wireless",
+      "name": "Site01-MR01"
+    }
+  ],
+  "mx": {
+    "vlans": []
+  },
+  "ms": {
+    "ports": [
+      {
+        "serial": "QXXX-MS-REPLACE",
+        "portId": "1",
+        "settings": {
+          "name": "AP uplink",
+          "enabled": true,
+          "type": "trunk",
+          "vlan": 1,
+          "allowedVlans": "all"
+        }
+      }
+    ]
+  },
+  "mr": {
+    "ssids": [
+      {
+        "number": 0,
+        "settings": {
+          "name": "Site01-Wireless",
+          "enabled": false,
+          "authMode": "psk",
+          "encryptionMode": "wpa",
+          "wpaEncryptionMode": "WPA2 only",
+          "psk": "ENV:MERAKI_WIFI_PSK"
+        }
+      }
+    ]
+  }
+}
