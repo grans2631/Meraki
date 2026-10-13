@@ -1,9 +1,3 @@
-<#
-.SYNOPSIS
-Open a Meraki API session using a masked credential prompt.
-.EXAMPLE
-Connect-Meraki
-#>
 function Connect-Meraki {
     <#
     .SYNOPSIS
@@ -77,12 +71,6 @@ function ConvertTo-MerakiQueryString {
     }
     return ($pairs -join '&')
 }
-<#
-.SYNOPSIS
-Send a Meraki Dashboard API v1 request; raw writes bypass ShouldProcess wrappers.
-.EXAMPLE
-Invoke-MerakiApi -Path '/organizations' -AllPages
-#>
 function Invoke-MerakiApi {
     <#
     .SYNOPSIS

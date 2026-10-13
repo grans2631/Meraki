@@ -1,9 +1,3 @@
-<#
-.SYNOPSIS
-Claim device serials into organization inventory.
-.EXAMPLE
-Add-MerakiOrganizationInventory -OrganizationId 'ORG_ID' -Serials @('QXXX-XXXX-XXXX') -WhatIf
-#>
 function Add-MerakiOrganizationInventory {
     <#
     .SYNOPSIS
@@ -11,6 +5,8 @@ function Add-MerakiOrganizationInventory {
     .DESCRIPTION
     Uses licensing-scoped API permissions. Cisco limits claim requests, and claiming may
     affect licensing. This does NOT assign devices to a Dashboard network.
+    .EXAMPLE
+    Add-MerakiOrganizationInventory -OrganizationId 'ORG_ID' -Serials @('QXXX-XXXX-XXXX') -WhatIf
     #>
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
