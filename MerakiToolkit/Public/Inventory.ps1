@@ -175,6 +175,27 @@ function Get-MerakiFirmwareReport {
             foreach ($type in @('appliance','switch','wireless')) {
                 $product = $info.products.$type
                 if (-not $product) { continue }
+                # A listed alternative version is NOT necessarily recommended.
+                # Null means the API has insufficient version metadata to compare.
+                $available = $product.availableVersions
+                $current = $product.currentVersion
+                $upgradeAvailable = $null
+                if ($null -ne $available) {
+                    $upgradeAvailable = $false
+                    foreach ($candidate in @($available)) {
+                        if ($null -eq $candidate) { continue }
+                        if ($current.id -and $candidate.id) {
+                            if ([string]$candidate.id -ne [string]$current.id) { $upgradeAvailable = $true; break }
+                        }
+                        elseif ($current.shortName -and $candidate.shortName) {
+                            if ([string]$candidate.shortName -ne [string]$current.shortName) { $upgradeAvailable = $true; break }
+                        }
+                        elseif ($current.firmware -and $candidate.firmware) {
+                            if ([string]$candidate.firmware -ne [string]$current.firmware) { $upgradeAvailable = $true; break }
+                        }
+                        else { $upgradeAvailable = $null }
+                    }
+                }
                 [pscustomobject]@{
                     NetworkName = $n.name
                     NetworkId = $n.id
@@ -183,7 +204,7 @@ function Get-MerakiFirmwareReport {
                     ReleaseType = $product.currentVersion.releaseType
                     LastUpgrade = $product.lastUpgrade.time
                     NextUpgrade = $product.nextUpgrade.time
-                    UpgradeAvailable = $product.isUpgradeAvailable
+                    UpgradeAvailable = $upgradeAvailable
                 }
             }
         } catch {
