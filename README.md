@@ -6,13 +6,13 @@ PowerShell automation for Cisco Meraki Dashboard API (MX appliances, MS switches
 
 The new PowerShell module is under [MerakiToolkit](MerakiToolkit/). It provides inventory, dashboards, diagnostics, provisioning and controlled writes.
 
-Legacy standalone scripts at repository root remain unchanged for compatibility:
+Legacy script filenames at repository root remain only as fail-fast stubs that throw `use MerakiToolkit`:
 - AccessPointFirmwareCheck.ps1
 - FirmwareChecks.ps1
 - FirmwareDashboard.ps1
 - ScheduleFirmwareUpdate.ps1
 
-NOTE: FirmwareDashboard.ps1 also contains unrelated local-admin snippets after its firmware section. Retained for compatibility, not copied into the module.
+The legacy firmware scripts no longer execute API requests or unrelated local-admin code. Use the module commands instead.
 
 ~~~powershell
 Import-Module .\MerakiToolkit\MerakiToolkit.psd1 -Force
