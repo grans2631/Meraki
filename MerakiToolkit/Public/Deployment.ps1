@@ -50,8 +50,8 @@ function Read-MerakiManifest {
         throw 'Specify network.name or network.existingNetworkId.'
     }
     $types = @($manifest.network.productTypes)
-    if (-not $types.Count -or ($types | Where-Object { $_ -notin @('appliance','switch','wireless') })) {
-        throw 'network.productTypes must contain one or more of appliance, switch, wireless.'
+    if (-not $types.Count -or ($types | Where-Object { $_ -notin @('appliance','switch','wireless','camera','cellularGateway','sensor') })) {
+        throw 'network.productTypes must contain one or more of appliance, switch, wireless, camera, cellularGateway, sensor.'
     }
     $serials = @()
     foreach ($d in @($manifest.devices | Where-Object { $null -ne $_ })) {

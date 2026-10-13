@@ -37,7 +37,7 @@ function Get-MerakiDevice {
     param(
         [Parameter(ParameterSetName='ByOrg',Mandatory)][string]$OrganizationId,
         [Parameter(ParameterSetName='BySerial',Mandatory)][string]$Serial,
-        [Parameter(ParameterSetName='ByOrg')][ValidateSet('appliance','switch','wireless')][string]$ProductType
+        [Parameter(ParameterSetName='ByOrg')][ValidateSet('appliance','switch','wireless','camera','cellularGateway','sensor')][string]$ProductType
     )
     if ($Serial) { return Invoke-MerakiApi -Path "/devices/$Serial" }
     $query = @{}
@@ -144,7 +144,7 @@ function Get-MerakiNetworkEvent {
     [CmdletBinding()]param(
         [Parameter(Mandatory)][string]$NetworkId,
         [ValidateRange(3,1000)][int]$PerPage = 100,
-        [ValidateSet('appliance','switch','wireless')][string]$ProductType
+        [ValidateSet('appliance','switch','wireless','camera','cellularGateway','sensor')][string]$ProductType
     )
     $q = @{ perPage=$PerPage }
     if ($ProductType) { $q.productType=$ProductType }
@@ -172,7 +172,7 @@ function Get-MerakiFirmwareReport {
     foreach ($n in @(Get-MerakiNetwork -OrganizationId $OrganizationId)) {
         try {
             $info = Get-MerakiNetworkFirmware -NetworkId $n.id
-            foreach ($type in @('appliance','switch','wireless')) {
+            foreach ($type in @('appliance','switch','wireless','camera','cellularGateway','sensor')) {
                 $product = $info.products.$type
                 if (-not $product) { continue }
                 # A listed alternative version is NOT necessarily recommended.
