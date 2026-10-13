@@ -163,6 +163,7 @@ function Invoke-MerakiDeployment {
             if ($matches.Count -gt 0) { throw 'A network with this name already exists. Set existingNetworkId to explicitly use it.' }
             $newParams = @{OrganizationId=$m.organizationId;Name=$m.network.name;ProductTypes=@($m.network.productTypes);Confirm=$false}
             if ($m.network.timeZone) { $newParams.TimeZone=[string]$m.network.timeZone }
+            if ($m.network.tags) { $newParams.Tags=@($m.network.tags) }
             $network = New-MerakiNetwork @newParams
             $networkId = $network.id
             $log.Add("Created network: $networkId")
