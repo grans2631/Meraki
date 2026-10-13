@@ -53,8 +53,15 @@ Describe 'MerakiToolkit comment-based help' {
         }
     }
 
-    It 'exposes help synopsis and examples to Get-Help' {
-        foreach ($name in $exportNames) {
+    It 'exposes detailed merged help to Get-Help for all 11 deduplicated commands' {
+        $deduplicated = @(
+            'Connect-Meraki','Invoke-MerakiApi','Add-MerakiNetworkDevice',
+            'Set-MerakiFirewallRules','Set-MerakiFirmwareUpgrade',
+            'Get-MerakiDeploymentPlan','Invoke-MerakiDeployment',
+            'Get-MerakiOrganizationInventory','Add-MerakiOrganizationInventory',
+            'Get-MerakiDashboard','Export-MerakiNetworkConfig'
+        )
+        foreach ($name in $deduplicated) {
             $help = Get-Help -Name $name -Full
             [string]$help.Synopsis | Should -Not -BeNullOrEmpty -Because "$name needs a synopsis"
             $examples = @($help.examples.example | Where-Object { $null -ne $_ })
