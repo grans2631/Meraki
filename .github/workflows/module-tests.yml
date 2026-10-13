@@ -18,7 +18,7 @@ jobs:
         shell: pwsh
         run: |
           Import-Module Pester -MinimumVersion 5.0
-          Invoke-Pester -Path @('./tests/Unit.Tests.ps1', './tests/Help.Tests.ps1') -CI
+          Invoke-Pester -Path @('./tests/Unit.Tests.ps1', './tests/Help.Tests.ps1', './tests/ConfigTemplates.Tests.ps1') -CI
 
   powershell-7-linux:
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
         shell: pwsh
         run: |
           Import-Module Pester -MinimumVersion 5.0
-          Invoke-Pester -Path @('./tests/Unit.Tests.ps1', './tests/Help.Tests.ps1') -CI
+          Invoke-Pester -Path @('./tests/Unit.Tests.ps1', './tests/Help.Tests.ps1', './tests/ConfigTemplates.Tests.ps1') -CI
 
   windows-powershell-51:
     runs-on: windows-latest
@@ -63,4 +63,4 @@ jobs:
           if ($PSVersionTable.PSVersion.Major -ne 5 -or $PSVersionTable.PSVersion.Minor -ne 1) { throw 'Wrong PowerShell engine.' }
           Import-Module Pester -RequiredVersion 5.7.1 -Force -ErrorAction Stop
           if ((Get-Module Pester).Version.ToString() -ne '5.7.1') { throw 'Wrong Pester version.' }
-          Invoke-Pester -Path @('./tests/Unit.Tests.ps1', './tests/Help.Tests.ps1') -CI
+          Invoke-Pester -Path @('./tests/Unit.Tests.ps1', './tests/Help.Tests.ps1', './tests/ConfigTemplates.Tests.ps1') -CI
