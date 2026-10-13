@@ -22,16 +22,14 @@ function New-MerakiNetwork {
         Invoke-MerakiApi -Method POST -Path "/organizations/$OrganizationId/networks" -Body $body
     }
 }
-<#
-.SYNOPSIS
-Assign claimed device serials to a selected network.
-.EXAMPLE
-Add-MerakiNetworkDevice -NetworkId 'N_123' -Serials @('QXXX-XXXX-XXXX') -WhatIf
-#>
 function Add-MerakiNetworkDevice {
     <#
+    .SYNOPSIS
+    Assign claimed device serials to a selected network.
     .DESCRIPTION
     Serial numbers must be claimed into organization inventory before assigning to a network.
+    .EXAMPLE
+    Add-MerakiNetworkDevice -NetworkId 'N_123' -Serials @('QXXX-XXXX-XXXX') -WhatIf
     #>
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param([Parameter(Mandatory)][string]$NetworkId,[Parameter(Mandatory)][string[]]$Serials)
@@ -132,17 +130,15 @@ function Set-MerakiApplianceVlan {
         Invoke-MerakiApi -Method PUT -Path "/networks/$NetworkId/appliance/vlans/$VlanId" -Body $Settings
     }
 }
-<#
-.SYNOPSIS
-Replace the ENTIRE MX L3 ruleset; never use a partial list.
-.EXAMPLE
-Set-MerakiFirewallRules -NetworkId 'N_123' -Rules @(@{comment='Allow DNS';policy='allow';protocol='udp';srcCidr='any';destCidr='any';destPort='53'}) -WhatIf
-#>
 function Set-MerakiFirewallRules {
     <#
+    .SYNOPSIS
+    Replace the ENTIRE MX L3 ruleset; never use a partial list.
     .DESCRIPTION
     CAUTION: replaces the COMPLETE MX L3 firewall rule set, not a single entry.
     Back up current rules and review your plan before applying.
+    .EXAMPLE
+    Set-MerakiFirewallRules -NetworkId 'N_123' -Rules @(@{comment='Allow DNS';policy='allow';protocol='udp';srcCidr='any';destCidr='any';destPort='53'}) -WhatIf
     #>
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param([Parameter(Mandatory)][string]$NetworkId,[Parameter(Mandatory)][object[]]$Rules)
@@ -178,17 +174,15 @@ function Restart-MerakiDevice {
         Invoke-MerakiApi -Method POST -Path "/devices/$Serial/reboot"
     }
 }
-<#
-.SYNOPSIS
-Schedule a network product-family firmware upgrade by version ID.
-.EXAMPLE
-Set-MerakiFirmwareUpgrade -NetworkId 'N_123' -ProductType switch -VersionId 'VERSION_ID' -TimeUtc '2026-12-01T03:00:00Z' -WhatIf
-#>
 function Set-MerakiFirmwareUpgrade {
     <#
+    .SYNOPSIS
+    Schedule a network product-family firmware upgrade by version ID.
     .DESCRIPTION
     Schedule an explicit firmware version ID and ISO 8601 UTC time.
     The API may refuse upgrades on unsupported networks or versions.
+    .EXAMPLE
+    Set-MerakiFirmwareUpgrade -NetworkId 'N_123' -ProductType switch -VersionId 'VERSION_ID' -TimeUtc '2026-12-01T03:00:00Z' -WhatIf
     #>
     [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
     param(
