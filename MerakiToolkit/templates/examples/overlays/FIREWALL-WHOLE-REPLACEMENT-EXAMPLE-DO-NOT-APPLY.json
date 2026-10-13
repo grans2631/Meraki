@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "MerakiConfigLayer",
+  "description": "DANGER: EXAMPLE ONLY; this is a WHOLE L3 RULESET replacement. Do not include in real assignment unless you have reviewed all existing firewall rules.",
+  "applianceL3FirewallRules": {
+    "rules": [
+      {
+        "comment": "Illustrative allow outbound DNS (NOT a complete customer policy)",
+        "policy": "allow",
+        "protocol": "udp",
+        "srcCidr": "any",
+        "destCidr": "any",
+        "destPort": "53"
+      }
+    ]
+  }
+}
