@@ -11,6 +11,15 @@ jobs:
       - name: Run offline smoke tests
         shell: pwsh
         run: ./tests/Smoke.Tests.ps1
+      - name: Install Pester 5
+        shell: pwsh
+        run: Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
+      - name: Run Pester pure helper tests
+        shell: pwsh
+        run: |
+          Import-Module Pester -MinimumVersion 5.0
+          Invoke-Pester -Path ./tests/Unit.Tests.ps1 -CI
+
   powershell-7-linux:
     runs-on: ubuntu-latest
     steps:
@@ -18,6 +27,15 @@ jobs:
       - name: Run offline smoke tests
         shell: pwsh
         run: ./tests/Smoke.Tests.ps1
+      - name: Install Pester 5
+        shell: pwsh
+        run: Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
+      - name: Run Pester pure helper tests
+        shell: pwsh
+        run: |
+          Import-Module Pester -MinimumVersion 5.0
+          Invoke-Pester -Path ./tests/Unit.Tests.ps1 -CI
+
   windows-powershell-51:
     runs-on: windows-latest
     steps:
@@ -25,3 +43,12 @@ jobs:
       - name: Run Windows PowerShell 5.1 smoke tests
         shell: powershell
         run: ./tests/Smoke.Tests.ps1
+      - name: Install Pester 5
+        shell: pwsh
+        run: Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
+      - name: Run Pester pure helper tests
+        shell: pwsh
+        run: |
+          Import-Module Pester -MinimumVersion 5.0
+          Invoke-Pester -Path ./tests/Unit.Tests.ps1 -CI
+
