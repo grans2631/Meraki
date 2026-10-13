@@ -1,3 +1,9 @@
+<#
+.SYNOPSIS
+Open a Meraki API session using a masked credential prompt.
+.EXAMPLE
+Connect-Meraki
+#>
 function Connect-Meraki {
     <#
     .SYNOPSIS
@@ -32,10 +38,22 @@ function Connect-Meraki {
     $script:MerakiMaxRetries = $MaxRetries
     Get-MerakiConnection
 }
+<#
+.SYNOPSIS
+Discard the current in-memory Meraki API credential.
+.EXAMPLE
+Disconnect-Meraki
+#>
 function Disconnect-Meraki {
     [CmdletBinding()]param()
     $script:MerakiApiKey = $null
 }
+<#
+.SYNOPSIS
+Show the current module connection state without disclosing the key.
+.EXAMPLE
+Get-MerakiConnection
+#>
 function Get-MerakiConnection {
     [CmdletBinding()]param()
     [pscustomobject]@{
@@ -59,6 +77,12 @@ function ConvertTo-MerakiQueryString {
     }
     return ($pairs -join '&')
 }
+<#
+.SYNOPSIS
+Send a Meraki Dashboard API v1 request; raw writes bypass ShouldProcess wrappers.
+.EXAMPLE
+Invoke-MerakiApi -Path '/organizations' -AllPages
+#>
 function Invoke-MerakiApi {
     <#
     .SYNOPSIS
