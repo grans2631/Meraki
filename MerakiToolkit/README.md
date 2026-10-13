@@ -41,7 +41,7 @@ Reports can include customer metadata and addressing. Although configuration exp
 
 ## Deploy any combination of MX, MS and MR
 
-Set network.productTypes in JSON to any subset of appliance, switch, wireless. Use network.existingNetworkId for an existing site, or provide network.name to create a new network. Devices need serial and productType. They must be in organization inventory unless claimToInventory is explicitly true.
+Set network.productTypes in JSON to any subset of appliance, switch, wireless, camera, cellularGateway, and sensor. Current per-product configuration automation is implemented for MX/MS/MR; new families are supported for inventory, network creation, naming and firmware where available. Use network.existingNetworkId for an existing site, or provide network.name to create a new network. Devices need serial and productType. They must be in organization inventory unless claimToInventory is explicitly true.
 
 ~~~powershell
 # Offline plan, no API calls and no changes
