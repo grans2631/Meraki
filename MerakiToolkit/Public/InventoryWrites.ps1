@@ -1,3 +1,9 @@
+<#
+.SYNOPSIS
+Claim device serials into organization inventory.
+.EXAMPLE
+Add-MerakiOrganizationInventory -OrganizationId 'ORG_ID' -Serials @('QXXX-XXXX-XXXX') -WhatIf
+#>
 function Add-MerakiOrganizationInventory {
     <#
     .SYNOPSIS
