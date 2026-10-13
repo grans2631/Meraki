@@ -87,3 +87,8 @@ Tests check parsing/import, manifest validation and WhatIf behavior with no API 
 Future: WAN/HA, advanced RF monitoring, automated repair recommendations, configuration drift, backup/restore automation, Domotz/StackWitness integration, richer dashboard UI and scheduled telemetry.
 
 Cisco API reference: https://developer.cisco.com/meraki/api-v1/api-index/
+
+
+## Round 4: Desired-state configuration templates (review-only)
+
+See [CONFIG-TEMPLATES.md](docs/CONFIG-TEMPLATES.md) for the versioned [JSON schema](templates/schema-v1.json), [small-office examples](templates/examples/), no-write Get-MerakiConfigDiff, exact-fingerprint Invoke-MerakiConfigTemplate and observe-only Get-MerakiConfigDrift. Changes require approval and a validated pre-apply snapshot. No automatic rollback, password/secret management, VLAN creation or VLAN deletion. Lab testing and user review are mandatory before production use.
