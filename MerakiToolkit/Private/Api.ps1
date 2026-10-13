@@ -71,7 +71,7 @@ function Invoke-MerakiApi {
     #>
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)][ValidateSet('GET','POST','PUT','DELETE')][string]$Method = 'GET',
+        [ValidateSet('GET','POST','PUT','DELETE')][string]$Method = 'GET',
         [Parameter(Mandatory)][ValidatePattern('^/')][string]$Path,
         [hashtable]$Query,
         [AllowNull()][object]$Body,
